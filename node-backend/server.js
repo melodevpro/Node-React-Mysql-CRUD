@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
     res.send('API is running ✅');
 });
 
-// ✅ Posts Route (CORREGIDA)
+// ✅ Get Route (CORREGIDA)
 app.get('/api/posts', (req, res) => {
     db.query("SELECT * FROM post", (err, rows) => {  // 🔥 TABLA CORRECTA
         if (err) {
@@ -38,6 +38,18 @@ app.get('/api/posts', (req, res) => {
             return res.status(500).json({ error: err.message });
         }
         res.json(rows);
+    });
+});
+
+// ✅ Posts Route (CORREGIDA)
+app.post('/api/posts', (req, res) => {
+    const {title, body} = req.body;
+    db.query("INSERT INTO post (title, body) VALUES (?, ?)", [title, body], (err, result) => {  // 🔥 TABLA CORRECTA
+        if (err) {
+            console.error(err);
+            return res.status(500).json({ error: err.message });
+        }
+        res.json({ id: result.insertId, title: title, body: body });
     });
 });
 
