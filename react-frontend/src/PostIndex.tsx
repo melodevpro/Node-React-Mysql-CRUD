@@ -12,6 +12,15 @@ export default function PostIndex() {
       .catch(err => console.error("Error fetching posts:", err));
   }, []);  // ✅ Solo se ejecuta una vez
 
+  const deletePost = (id: number) => {
+    if(confirm("Are you sure you want to delete this post?")) {
+        axios.delete(`http://localhost:3000/api/posts/${id}`)
+            .then(() => {
+              setPosts(posts.filter(p => p.id !== id));
+        })
+    }
+  }
+
   return (
     <>
     <div className="p-6 max-w-5xl mx-auto">
@@ -43,10 +52,11 @@ export default function PostIndex() {
                   <Link to={`/edit/${post.id}`} className="px-3 py-1 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded">
                     Edit
                   </Link>
-                  <button className="px-3 py-1 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded">
+                  <Link to={`/show/ ${post.id}`} className="px-3 py-1 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded">
                     Show
-                  </button>
-                  <button className="px-3 py-1 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded">
+                  </Link>
+                  <button onClick={() => deletePost(post.id)}
+                   className="px-3 py-1 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded">
                     Delete
                   </button>
                 </td>
