@@ -40,9 +40,15 @@ export default function PostIndex() {
                 <td className="px-6 py-3">{post.title}</td>
                 <td className="px-6 py-3">{post.body}</td>
                 <td className="px-6 py-3 flex justify-center gap-2">
-                  <button className="px-3 py-1 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded">Edit</button>
-                  <button className="px-3 py-1 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded">Show</button>
-                  <button className="px-3 py-1 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded">Delete</button>
+                  <Link to={`/edit/${post.id}`} className="px-3 py-1 text-xs font-medium text-white bg-blue-600 hover:bg-blue-700 rounded">
+                    Edit
+                  </Link>
+                  <button className="px-3 py-1 text-xs font-medium text-white bg-green-600 hover:bg-green-700 rounded">
+                    Show
+                  </button>
+                  <button className="px-3 py-1 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded">
+                    Delete
+                  </button>
                 </td>
               </tr>
             )) : (
